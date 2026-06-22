@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://2tjnmfwlsj5d"]
+
+[ext_resource type="Script" uid="uid://cbotf4ei0gird" path="res://maps/enemy.gd" id="1_dyenr"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_e8l4j"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_e8l4j"]
+
+[node name="World" type="Node3D" unique_id=824321860]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1177558103]
+transform = Transform3D(40, 0, 0, 0, 40, 0, 0, 0, 40, 0.083927155, 0.029361725, -0.25307274)
+mesh = SubResource("PlaneMesh_e8l4j")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=185022042]
+transform = Transform3D(45, 0, 0, 0, 45, 0, 0, 0, 45, 0, 0, 0)
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=773209720]
+transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 20, 20)
+
+[node name="Enemy" type="Node3D" parent="." unique_id=1726080614]
+script = ExtResource("1_dyenr")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Enemy" unique_id=2104629195]
+mesh = SubResource("BoxMesh_e8l4j")
