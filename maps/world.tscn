@@ -1,43 +1,72 @@
 [gd_scene format=3 uid="uid://2tjnmfwlsj5d"]
 
 [ext_resource type="Script" uid="uid://53if36kxrne" path="res://enemies/enemy_spawner.gd" id="1_dyenr"]
-[ext_resource type="Script" uid="uid://cbotf4ei0gird" path="res://enemies/enemy.gd" id="1_uds71"]
+
+[sub_resource type="GDScript" id="GDScript_dyenr"]
+script/source = "extends Node3D
+
+var goal
+var speed = 2.5
+
+func _ready():
+	goal = get_tree().get_first_node_in_group(\"goal\")
+
+func _process(delta):
+	if goal == null:
+		return
+
+	var dist = position.distance_to(goal.position)
+
+	if dist < 1.0:
+		queue_free()
+		return
+
+	var dir = (goal.position - position).normalized()
+	position += dir * speed * delta
+	
+"
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_e8l4j"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_e5if3"]
-size = Vector3(0.16503906, 1, 2.4771729)
+[sub_resource type="BoxMesh" id="BoxMesh_e8l4j"]
+size = Vector3(3.46875, 1, 2.9528198)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_e8l4j"]
-size = Vector3(1, 2.0528564, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dic6c"]
 
 [node name="World" type="Node3D" unique_id=824321860]
-script = ExtResource("1_uds71")
+script = SubResource("GDScript_dyenr")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1177558103]
-transform = Transform3D(40, 0, 0, 0, 40, 0, 0, 0, 40, 0.083927155, 0.029361725, -0.25307274)
+transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0.2771387, 0.02640915, -0.30595446)
 mesh = SubResource("PlaneMesh_e8l4j")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=185022042]
-transform = Transform3D(45, 0, 0, 0, 45, 0, 0, 0, 45, 0, 0, 0)
+transform = Transform3D(38.97114, -19.485573, 11.249999, 0, 22.499998, 38.971146, -22.5, -33.75, 19.485569, 0, 0, 0)
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=773209720]
-transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 20, 20)
+transform = Transform3D(0.9999963, 0.0019157219, -0.0019157216, 0, 0.7071067, 0.7071068, 0.0027092397, -0.7071042, 0.7071041, 0, 10, 9.999878)
 
-[node name="Goal" type="Node3D" parent="." unique_id=178236829]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 0)
+[node name="Goal" type="Node3D" parent="." unique_id=1096472066]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Goal" unique_id=142890364]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.41748047, 0, 0.6140747)
-mesh = SubResource("BoxMesh_e5if3")
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Goal" unique_id=1307092252]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.765625, 0, 0.47903442)
+mesh = SubResource("BoxMesh_e8l4j")
 
-[node name="Area3D" type="Area3D" parent="Goal" unique_id=248882839]
+[node name="Area3D" type="Area3D" parent="Goal" unique_id=626809445]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Goal/Area3D" unique_id=898774719]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5264282, 0)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Goal/Area3D" unique_id=70414843]
 shape = SubResource("BoxShape3D_e8l4j")
-debug_fill = false
 
-[node name="EnemySpawner" type="Node3D" parent="." unique_id=70002066]
+[node name="EnemySpawner" type="Node3D" parent="." unique_id=363028106]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 0)
 script = ExtResource("1_dyenr")
+
+[node name="Enemy" type="Node3D" parent="." unique_id=1490006798]
+
+[node name="Area3D" type="Area3D" parent="Enemy" unique_id=1783146869]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Enemy/Area3D" unique_id=1345678501]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 0)
+shape = SubResource("BoxShape3D_dic6c")
