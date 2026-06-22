@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://53if36kxrne" path="res://maps/enemy_spawner.gd" id="1_dyenr"]
 [ext_resource type="Script" uid="uid://dy8nkvdx7xcm5" path="res://maps/camera_3d.gd" id="1_uds71"]
 [ext_resource type="PackedScene" uid="uid://bes8mn4s1bbs" path="res://enemies/enemy.tscn" id="2_e0ubd"]
+[ext_resource type="PackedScene" uid="uid://dlxoylab7wxl" path="res://towers/tower.tscn" id="4_d4ksw"]
+[ext_resource type="Script" uid="uid://c6nqupgabyvja" path="res://towers/tower.gd" id="5_41f5y"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_e8l4j"]
 size = Vector3(1.4991455, 0.001, 1.6678467)
@@ -48,4 +50,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -6.005)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 0)
 
 [node name="WPEnd" type="Marker3D" parent="Waypoints" unique_id=559328595]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.629944, 0, -2.9882813)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.025696, 0, 0)
+
+[node name="Tower" parent="." unique_id=974781967 instance=ExtResource("4_d4ksw")]
+script = ExtResource("5_41f5y")

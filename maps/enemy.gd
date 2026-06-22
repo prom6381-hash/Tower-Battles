@@ -5,6 +5,7 @@ var waypoints = []
 var current_index = 0
 
 func _ready():
+	add_to_group("enemies")
 	var wp_parent = get_tree().current_scene.get_node("Waypoints")
 
 	for child in wp_parent.get_children():
@@ -29,3 +30,4 @@ func _process(delta):
 			return
 
 		current_index += 1
+		

@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://dlxoylab7wxl"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_d6uia"]
+
+[node name="Tower" type="Node3D" unique_id=974781967]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=225570882]
+mesh = SubResource("CylinderMesh_d6uia")
