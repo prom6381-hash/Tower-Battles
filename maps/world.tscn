@@ -1,12 +1,18 @@
 [gd_scene format=3 uid="uid://2tjnmfwlsj5d"]
 
-[ext_resource type="Script" uid="uid://53if36kxrne" path="res://maps/enemy_spawner.gd" id="1_dyenr"]
+[ext_resource type="Script" uid="uid://53if36kxrne" path="res://enemies/enemy_spawner.gd" id="1_dyenr"]
+[ext_resource type="Script" uid="uid://cbotf4ei0gird" path="res://enemies/enemy.gd" id="1_uds71"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_e8l4j"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_e5if3"]
+size = Vector3(0.16503906, 1, 2.4771729)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_e8l4j"]
+size = Vector3(1, 2.0528564, 1)
 
 [node name="World" type="Node3D" unique_id=824321860]
+script = ExtResource("1_uds71")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1177558103]
 transform = Transform3D(40, 0, 0, 0, 40, 0, 0, 0, 40, 0.083927155, 0.029361725, -0.25307274)
@@ -22,7 +28,15 @@ transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Goal" unique_id=142890364]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.41748047, 0, 0.6140747)
 mesh = SubResource("BoxMesh_e5if3")
+
+[node name="Area3D" type="Area3D" parent="Goal" unique_id=248882839]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Goal/Area3D" unique_id=898774719]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5264282, 0)
+shape = SubResource("BoxShape3D_e8l4j")
+debug_fill = false
 
 [node name="EnemySpawner" type="Node3D" parent="." unique_id=70002066]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 0)
