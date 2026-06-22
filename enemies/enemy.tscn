@@ -1,34 +1,11 @@
 [gd_scene format=3 uid="uid://bes8mn4s1bbs"]
 
-[sub_resource type="GDScript" id="GDScript_dyenr"]
-script/source = "extends Node3D
+[ext_resource type="Script" uid="uid://cbotf4ei0gird" path="res://maps/enemy.gd" id="1_fw1ev"]
 
-var goal
-var speed = 2.5
+[sub_resource type="BoxMesh" id="BoxMesh_e5if3"]
 
-func _ready():
-	goal = get_tree().get_first_node_in_group(\"goal\")
+[node name="Enemy" type="Node3D" unique_id=484571603]
+script = ExtResource("1_fw1ev")
 
-func _process(delta):
-	if goal == null:
-		return
-
-	var dist = position.distance_to(goal.position)
-
-	if dist < 1.0:
-		queue_free()
-		return
-
-	var dir = (goal.position - position).normalized()
-	position += dir * speed * delta
-	
-"
-
-[sub_resource type="BoxMesh" id="BoxMesh_dic6c"]
-
-[node name="Enemy" type="Node3D" unique_id=1584952689]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 0)
-script = SubResource("GDScript_dyenr")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=766926728]
-mesh = SubResource("BoxMesh_dic6c")
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1136009297]
+mesh = SubResource("BoxMesh_e5if3")

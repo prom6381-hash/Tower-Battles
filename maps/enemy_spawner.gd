@@ -10,5 +10,8 @@ func _process(delta):
 		timer = 0.0
 
 		var enemy = enemy_scene.instantiate()
-		get_parent().add_child(enemy)
-		enemy.position = position
+		get_tree().current_scene.add_child(enemy)
+
+		enemy.global_position = global_position + Vector3(0, 0, 0)
+
+		print("SPAWN OK")

@@ -1,72 +1,51 @@
 [gd_scene format=3 uid="uid://2tjnmfwlsj5d"]
 
-[ext_resource type="Script" uid="uid://53if36kxrne" path="res://enemies/enemy_spawner.gd" id="1_dyenr"]
-
-[sub_resource type="GDScript" id="GDScript_dyenr"]
-script/source = "extends Node3D
-
-var goal
-var speed = 2.5
-
-func _ready():
-	goal = get_tree().get_first_node_in_group(\"goal\")
-
-func _process(delta):
-	if goal == null:
-		return
-
-	var dist = position.distance_to(goal.position)
-
-	if dist < 1.0:
-		queue_free()
-		return
-
-	var dir = (goal.position - position).normalized()
-	position += dir * speed * delta
-	
-"
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_e8l4j"]
+[ext_resource type="Script" uid="uid://53if36kxrne" path="res://maps/enemy_spawner.gd" id="1_dyenr"]
+[ext_resource type="Script" uid="uid://dy8nkvdx7xcm5" path="res://maps/camera_3d.gd" id="1_uds71"]
+[ext_resource type="PackedScene" uid="uid://bes8mn4s1bbs" path="res://enemies/enemy.tscn" id="2_e0ubd"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_e8l4j"]
-size = Vector3(3.46875, 1, 2.9528198)
+size = Vector3(1.4991455, 0.001, 1.6678467)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_e8l4j"]
+[sub_resource type="BoxMesh" id="BoxMesh_dic6c"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_dic6c"]
+[node name="World" type="Node3D" unique_id=302433525]
 
-[node name="World" type="Node3D" unique_id=824321860]
-script = SubResource("GDScript_dyenr")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1177558103]
-transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0.2771387, 0.02640915, -0.30595446)
-mesh = SubResource("PlaneMesh_e8l4j")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=185022042]
-transform = Transform3D(38.97114, -19.485573, 11.249999, 0, 22.499998, 38.971146, -22.5, -33.75, 19.485569, 0, 0, 0)
-
-[node name="Camera3D" type="Camera3D" parent="." unique_id=773209720]
-transform = Transform3D(0.9999963, 0.0019157219, -0.0019157216, 0, 0.7071067, 0.7071068, 0.0027092397, -0.7071042, 0.7071041, 0, 10, 9.999878)
-
-[node name="Goal" type="Node3D" parent="." unique_id=1096472066]
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Goal" unique_id=1307092252]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.765625, 0, 0.47903442)
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=206908661]
+transform = Transform3D(0, 0, 0, 0, 1, 0, 0, 0, 20, 0, -0.5, 0)
 mesh = SubResource("BoxMesh_e8l4j")
 
-[node name="Area3D" type="Area3D" parent="Goal" unique_id=626809445]
+[node name="Camera3D" type="Camera3D" parent="." unique_id=257887853]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.045715332, 0.26837158, 7.414673)
+current = true
+script = ExtResource("1_uds71")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Goal/Area3D" unique_id=70414843]
-shape = SubResource("BoxShape3D_e8l4j")
+[node name="Enemy" parent="." unique_id=484571603 instance=ExtResource("2_e0ubd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0, 0)
 
-[node name="EnemySpawner" type="Node3D" parent="." unique_id=363028106]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 0)
+[node name="EnemySpawner" type="Node3D" parent="." unique_id=958985569]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0, 0)
 script = ExtResource("1_dyenr")
 
-[node name="Enemy" type="Node3D" parent="." unique_id=1490006798]
+[node name="Base" type="Node3D" parent="." unique_id=1021147517]
 
-[node name="Area3D" type="Area3D" parent="Enemy" unique_id=1783146869]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Base" unique_id=1464699448]
+transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 2, 5, 0, 0)
+mesh = SubResource("BoxMesh_dic6c")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Enemy/Area3D" unique_id=1345678501]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 0)
-shape = SubResource("BoxShape3D_dic6c")
+[node name="Waypoints" type="Node3D" parent="." unique_id=155027193]
+
+[node name="WP1" type="Marker3D" parent="Waypoints" unique_id=405917008]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.532532, 0, 0)
+
+[node name="WP2" type="Marker3D" parent="Waypoints" unique_id=1153904827]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.548, 0, -6)
+
+[node name="WP3" type="Marker3D" parent="Waypoints" unique_id=914734378]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -6.005)
+
+[node name="WP4" type="Marker3D" parent="Waypoints" unique_id=1646617056]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 0)
+
+[node name="WPEnd" type="Marker3D" parent="Waypoints" unique_id=559328595]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.629944, 0, -2.9882813)
