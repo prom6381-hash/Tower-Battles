@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://2tjnmfwlsj5d"]
 
-[ext_resource type="Script" uid="uid://cbotf4ei0gird" path="res://maps/enemy.gd" id="1_dyenr"]
+[ext_resource type="Script" uid="uid://53if36kxrne" path="res://maps/enemy_spawner.gd" id="1_dyenr"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_e8l4j"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_e8l4j"]
+[sub_resource type="BoxMesh" id="BoxMesh_e5if3"]
 
 [node name="World" type="Node3D" unique_id=824321860]
 
@@ -18,11 +18,12 @@ transform = Transform3D(45, 0, 0, 0, 45, 0, 0, 0, 45, 0, 0, 0)
 [node name="Camera3D" type="Camera3D" parent="." unique_id=773209720]
 transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 20, 20)
 
-[node name="Enemy" type="Node3D" parent="." unique_id=1726080614]
-script = ExtResource("1_dyenr")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Enemy" unique_id=2104629195]
-mesh = SubResource("BoxMesh_e8l4j")
-
 [node name="Goal" type="Node3D" parent="." unique_id=178236829]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Goal" unique_id=142890364]
+mesh = SubResource("BoxMesh_e5if3")
+
+[node name="EnemySpawner" type="Node3D" parent="." unique_id=70002066]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 0)
+script = ExtResource("1_dyenr")
